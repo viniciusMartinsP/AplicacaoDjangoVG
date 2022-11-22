@@ -143,9 +143,9 @@
                                         height="100%"/>
 
                                     <div class="card-body">
-                                        <h5 class="card-title">
+                                        <h4 class="card-title">
                                             {{ posts.0.titulo }}
-                                        </h5>
+                                        </h4>
 
                                         <p class="card-text">
                                             {{ posts.0.resumo|safe }}
@@ -190,14 +190,16 @@
                         </div>
                         <hr class="my-4" />
                         <div class="row row-cols-1 row-cols-md-2 g-4">
-                            {% for i in '0123' %}
+                            {% for post in posts|slice:"1:5" %}
                                 <div class="col">
                                     <div class="card">
-                                        <img src="{% static 'blog/a1.jpg' %}" class="card-img-top" alt="..." width="100%" height="100%" />
+                                        <img src="{{ post.imagem_capa.url }}" class="card-img-top" alt="Image de capa do POST" width="100%" height="100%" />
                                         <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
+                                            <h5 class="card-title">
+                                                {{ post.titulo }} 
+                                            </h5>
                                             <p class="card-text">
-                                                This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                                                {{ post.resumo|slice:"0:250"|safe }}
                                             </p>
                                         </div>
                                     </div>
