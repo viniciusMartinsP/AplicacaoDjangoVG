@@ -44,7 +44,7 @@
                                              height="100%"/>
                                     </a>
                                     <div class="card-body pb-4">
-                                        <a href="{% url 'post_detail' posts.0.id %}">
+                                        <a href="{% url 'post_detail' posts.0.id %}" class="text-decoration-none text-dark">
                                             <h4 class="card-title">{{ posts.0.titulo }}</h4>
                                         </a>
                                         <p class="card-text">{{ posts.0.resumo|safe }}</p>
@@ -116,7 +116,7 @@
                                         </a>
 
                                         <div class="card-body pb-3">
-                                            <a href="{% url 'post_detail' post.id %}">
+                                            <a href="{% url 'post_detail' post.id %}" class="text-decoration-none text-dark">
                                                 <h5 class="card-title">{{ post.titulo }}</h5>
                                             </a>
                                             <p class="card-text">{{ post.resumo|slice:"0:250"|safe }}...</p>
