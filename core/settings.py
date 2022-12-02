@@ -35,10 +35,12 @@ INSTALLED_APPS = [
     'contato.apps.ContatoConfig',
     'cursos.apps.CursosConfig',
     'autenticacao.apps.AutenticacaoConfig',
+    'contas.apps.ContasConfig',
     
     'exemplos',
     'ckeditor',
     'ckeditor_uploader',
+    'widget_tweaks',
 
 ]
 

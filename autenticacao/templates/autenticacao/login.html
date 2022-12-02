@@ -25,68 +25,110 @@
         </div>
       </div>
     </div>
+
     <!--CORPO DA PÁGINA ESCRITO LOGIN-->
+
     <main>
       <div class="container-fluid">
         <div class="row justify-content-center">
           <div class="col-xl-8">
             <div class="row justify-content-center">
               <div class="col-md-6">
-                <div class="card-body my-5 border rounded bg-light p-3">
-                  <div class="mt-3">
-                    <span class="fw-bold fs-2 text-primary">Login</span>
-                  </div>
-                  <!--FORMULÁRIO-->
-                  <form>
-                    <p class="form-label mt-3">Usuário ou email</p>
-                    <div class="form-floating mb-3">
-                      <input type="email"
-                             class="form-control"
-                             id="idEmailLogin"
-                             placeholder="name@example.com"/>
-                      <label for="idEmailLogin">Email</label>
+                {% if not user.is_authenticated %}
+                  <div class="card-body my-5 border rounded bg-light p-3">
+                    <div class="mt-3">
+                      <span class="fw-bold fs-2 text-primary">Login</span>
                     </div>
-                    <p class="form-label mt-3">Senha</p>
-                    <div class="form-floating">
-                      <input type="password"
-                             class="form-control"
-                             id="SenhaLogin"
-                             placeholder="Password"/>
-                      <label for="SenhaLogin">Senha</label>
-                      <!--BOTÃO ESQUECI MINHA SENHA-->
-                      <div class="my-2 text-end">
-                        <a href="#" class="btn">
-                          <span class="text-success fw-bold">Esqueci minha senha</span>
-                        </a>
+                    <!--FORMULÁRIO-->
+                    <form method="post" action={% url 'login' %}>
+                      {% csrf_token %}
+                      {% if messages %}
+                        {% for message in messages %}
+                          {% if message.tags %}<div class="alert alert-danger text-center" role="alert">{{ message }}</div>{% endif %}
+                        {% endfor %}
+                      {% endif %}
+                      <p class="form-label mt-3">Usuário ou email</p>
+                      <div class="form-floating mb-3">
+                        <input type="text"
+                               class="form-control"
+                               id="idEmailLogin"
+                               name="username"
+                               value="{{ username }}"
+                               placeholder="name@example.com"/>
+                        <label for="idEmailLogin">Email or username</label>
                       </div>
-                      <!--LOGIN-->
-                      <div class="d-grid mt-2">
-                        <button class="btn btn-success" type="button">LOGIN</button>
-                      </div>
-                      <!--GOOGLE-->
-                      <div class="d-grid mt-2">
-                        <button class="btn btn-danger" type="button">
-                          <i class="fa-brands fa-google"></i>
-                        </button>
-                      </div>
-                      <!--FACEBOOK-->
-                      <div class="d-grid mt-2">
-                        <button class="btn btn-primary" type="button">
-                          <i class="fa-brands fa-facebook"></i>
-                        </button>
-                      </div>
-                      <!--TWIITER-->
-                      <div class="d-grid mt-2">
-                        <button class="btn btn-primary" type="button">
-                          <i class="fa-brands fa-twitter"></i>
-                        </button>
-                      </div>
-                      <div class="my-2 text-center">
-                        <a class="btn text-secondary fw-bold" href="#">Criar conta</a>
-                      </div>
-                    </form>
+                      <p class="form-label mt-3">Senha</p>
+                      <div class="form-floating">
+                        <input type="password"
+                               class="form-control"
+                               id="SenhaLogin"
+                               name="password"
+                               value="{{ password }}"
+                               placeholder="Password"/>
+                        <label for="SenhaLogin">Senha</label>
+                        <!--BOTÃO ESQUECI MINHA SENHA-->
+                        <div class="my-2 text-end">
+                          <a href="#" class="btn">
+                            <span class="text-success fw-bold">Esqueci minha senha</span>
+                          </a>
+                        </div>
+                        <!--LOGIN-->
+                        <div class="d-grid mt-2">
+                          <button class="btn btn-success" type="submit">LOGIN</button>
+                        </div>
+                        <!--GOOGLE-->
+                        <div class="d-grid mt-2">
+                          <button class="btn btn-danger" type="button">
+                            <i class="fa-brands fa-google"></i>
+                          </button>
+                        </div>
+                        <!--FACEBOOK-->
+                        <div class="d-grid mt-2">
+                          <button class="btn btn-primary" type="button">
+                            <i class="fa-brands fa-facebook"></i>
+                          </button>
+                        </div>
+                        <!--TWIITER-->
+                        <div class="d-grid mt-2">
+                          <button class="btn btn-primary" type="button">
+                            <i class="fa-brands fa-twitter"></i>
+                          </button>
+                        </div>
+                        <div class="my-2 text-center">
+                          <a class="btn text-secondary fw-bold" href="{% url 'criar_conta' %}">Criar conta</a>
+                        </div>
+                      </form>
+                    </div>
                   </div>
-                </div>
+                {% else %}
+                  <div class="card my-5">
+                    <div class="card-header p-5">
+                      <h3 class="text-success text-center">{{ user.username|capfirst }}, você já está logado no sistema</h3>
+                      <p class="h5 text-center textprimary">Deseja fazer logoff?</p>
+                    </div>
+                    <div class="card-body d-flex justify-content-center">
+
+                      <button type="button"
+                              class="btn btn-danger me-2"
+                              hx-get="autenticacao/processa_logout/"
+                              hx-trigger="click"
+                              hx-target="body">
+                        Sim
+                      </button>
+                      
+                      <button type="button"
+                              class="btn btn-primary"
+                              hx-get="autenticacao/processa_redirect_home/"
+                              hx-trigger="click"
+                              hx-target="body"
+                              hw-swap="outerHTML"
+                              hx-push-url="true"
+                              >
+                        NÃO
+                      </button>
+                    </div>
+                  </div>
+                {% endif %}
               </div>
             </div>
           </div>
