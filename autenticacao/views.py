@@ -22,6 +22,7 @@ def processa_login(request):
     return render(request, 'autenticacao/login.html')
 
 def processa_logout(request):
+    print('Chamou o processa logout')
     logout(request)
     return redirect("login")
 

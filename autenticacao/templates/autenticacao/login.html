@@ -8,11 +8,14 @@
           rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
           crossorigin="anonymous"/>
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
           integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
           crossorigin="anonymous"
           referrerpolicy="no-referrer"/>
+
+    <script src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
     <title>Bootstrap demo</title>
   </head>
   <body>
@@ -107,25 +110,25 @@
                       <p class="h5 text-center textprimary">Deseja fazer logoff?</p>
                     </div>
                     <div class="card-body d-flex justify-content-center">
-
                       <button type="button"
                               class="btn btn-danger me-2"
                               hx-get="autenticacao/processa_logout/"
                               hx-trigger="click"
-                              hx-target="body">
-                        Sim
+                              hx-target="body"
+                              >
+                        SIM     
                       </button>
-                      
+
                       <button type="button"
-                              class="btn btn-primary"
+                              class="btn btn-danger me-2"
                               hx-get="autenticacao/processa_redirect_home/"
                               hx-trigger="click"
                               hx-target="body"
                               hw-swap="outerHTML"
                               hx-push-url="true"
                               >
-                        NÃO
-                      </button>
+                        NÃO     
+                      </button>                        
                     </div>
                   </div>
                 {% endif %}
