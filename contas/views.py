@@ -1,9 +1,19 @@
+import re
+
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
 from .usuario_form import PerfilForm
 
+
+def validou_email(email):
+    regex = '^(\w+)@[a-z]+(\.[a-z]+){1,2}$'
+
+    if (re.search(regex, email)):
+        return True
+    else:
+        return False
 
 def criar_conta(request):
     if request.method == 'POST':
@@ -40,6 +50,16 @@ def htmx_valida_senha(request):
 
     if passwordd_confirm != password:
         return HttpResponse("<label style='color:red;'>As senhas não coincidem.</label>")
+    else:
+        return HttpResponse("")
+
+def htmx_valida_email(request):
+    email = request.POST.get('email')
+
+    if not validou_email(email):
+        return HttpResponse("<label style='color:red;'>E-mail inválido.</label>")
+    if User.objects.filter(email=email):
+        return HttpResponse("<label style='color:red;'>E-mail já cadastrado.</label>")
     else:
         return HttpResponse("")
 
