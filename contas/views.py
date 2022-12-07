@@ -3,6 +3,7 @@ import re
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
 
 from .usuario_form import PerfilForm
 
@@ -54,6 +55,7 @@ def htmx_valida_senha(request):
         return HttpResponse("")
 
 def htmx_valida_email(request):
+    context = {'usr_email':'E-mail inválido ou já cadastrado','st_submit':'disabled'}
     email = request.POST.get('email')
 
     if not validou_email(email):
@@ -61,5 +63,8 @@ def htmx_valida_email(request):
     if User.objects.filter(email=email):
         return HttpResponse("<label style='color:red;'>E-mail já cadastrado.</label>")
     else:
-        return HttpResponse("")
+        context['usr_email']="E-mail disponível"
+        context['st_submit']=''
+        str_template = render_to_string('contas/feedback_form_validation.html', context)
+        return HttpResponse(str_template)
 
