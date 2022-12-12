@@ -22,7 +22,14 @@ def processa_login(request):
     return render(request, 'autenticacao/login.html')
 
 def processa_logout(request):
-    print('Chamou o processa logout')
+
+    # Este trecho de código serve para limpar o storage de messages, código na própria 
+    # biblioteca do DJANGO
+    storage = messages.get_messages(request)
+    
+    for messagem in storage:
+        pass
+    messages.add_message(request=request, message="Logoff realizado", level=messages.ERROR)
     logout(request)
     return redirect("login")
 

@@ -37,22 +37,31 @@ def criar_conta(request):
         return render(request, 'contas/criar_conta.html', {'form':PerfilForm()})
 
 def htmx_valida_username(request):
+    context = {'error_username':'Username indisponível', 'st_submit':'disabled', 'cor':'red'}
     username_digitado = request.POST.get('username')
-    if len(username_digitado)<5:
-        return HttpResponse("<label style='color:red;'>Tamanho mínimo de 5 caracteres.</label>")
-    elif User.objects.filter(username=username_digitado):
-        return HttpResponse("<label style='color:red;'>Usuário indisponível.</label>")
-    else :
-        return HttpResponse("<label style='color:green;'>Usuário disponível.</label>")
+    
+    if not User.objects.filter(username=username_digitado):
+        context['error_username'] = 'Username disponível'
+        context['cor']='green'
+    
+    if PerfilForm(request.POST).is_valid():
+        context['st_submit']=''
+
+    str_template = render_to_string('contas/feedback_form_validation.html', context)
+    return HttpResponse(str_template)
 
 def htmx_valida_senha(request):
-    passwordd_confirm = request.POST.get('pwd_confirm')
+    context = {'error_pwd':'As senhas não coincidem', 'st_submit':'disabled', 'cor':'red'}
+    password_confirm = request.POST.get('pwd_confirm')
     password = request.POST.get('password')
 
-    if passwordd_confirm != password:
-        return HttpResponse("<label style='color:red;'>As senhas não coincidem.</label>")
-    else:
-        return HttpResponse("")
+    if password_confirm == password and PerfilForm(request.POST).is_valid():
+        context['error_pwd']=''
+        context['st_submit']=''
+        
+    str_template = render_to_string('contas/feedback_form_validation.html', context)
+    return HttpResponse(str_template)
+    
 
 def htmx_valida_email(request):
     context = {'usr_email':'E-mail inválido ou já cadastrado','st_submit':'disabled'}
@@ -60,6 +69,7 @@ def htmx_valida_email(request):
 
     if not validou_email(email):
         return HttpResponse("<label style='color:red;'>E-mail inválido.</label>")
+    
     if User.objects.filter(email=email):
         return HttpResponse("<label style='color:red;'>E-mail já cadastrado.</label>")
     else:
