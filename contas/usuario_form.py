@@ -12,15 +12,15 @@ class UserForm(ModelForm):
         self.fields['last_name'].required = True
         self.fields['username'].required = True
         self.fields['email'].required = True
-        self.fields['password'].required = True
-        
+        self.fields['password'].required = True 
+
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password']
         labels = {
             'username':'Nome de usuário'
         }
-
+        
         widgets = {
             'first_name': forms.TextInput(attrs={"class":"form-control"}),
             'last_name': forms.TextInput(attrs={"class":"form-control"}),
@@ -28,7 +28,6 @@ class UserForm(ModelForm):
             'email': forms.EmailInput(attrs={"class":"form-control"}),
             'password': forms.PasswordInput(attrs={"class":"form-control"}),
         }
-
 class PerfilForm(ModelForm):
     class Meta:
         model = Perfil
