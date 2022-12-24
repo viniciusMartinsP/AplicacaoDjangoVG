@@ -1,0 +1,35 @@
+<div class="card">
+
+    <a href="{% url 'post_detail' post.id %}">
+        <img src="{{ post.imagem_capa.url }}"
+             class="card-img-top img-350"
+             alt="WALLPAPER"
+             width="100%"
+             height="100%"/>
+    </a>
+
+    <div class="card-body pb-4">
+        <a href="{% url 'post_detail' post.id %}" class="text-decoration-none text-dark">
+            <h4 class="card-title">{{ post.titulo }}</h4>
+        </a>
+        <p class="card-text">{{ post.resumo|safe }}</p>
+        <p class="card-text text-end">
+            <small class="text-muted">{{ post.data_publicacao }}</small>
+        </p>
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-center">
+                    <div class="span me-3 btn">
+                        <i class="fa-solid fa-heart "></i>Curtir
+                    </div>
+                    <div class="span me-3 btn">
+                        <i class="fa-regular fa-comment"></i> Comentar
+                    </div>
+                    <div class="span me-3 btn">
+                        <i class="fa-solid fa-share"></i> Compartilhar
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

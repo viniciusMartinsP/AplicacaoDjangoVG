@@ -12,6 +12,7 @@ urlpatterns = [
     path('contato/', include('contato.urls')),
     path('criar_conta/', include('contas.urls')),
     path('exemplos/', include('exemplos.urls')),
+    path('testes/', include('testes_pessoais.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/', include('allauth.urls')),
 

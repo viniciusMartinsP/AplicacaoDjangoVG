@@ -25,13 +25,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'django.contrib.admin.templatetags',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
+    
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'cursos.apps.CursosConfig',
     'autenticacao.apps.AutenticacaoConfig',
     'contas.apps.ContasConfig',
+    'testes_pessoais.apps.TestesPessoaisConfig',
     
     'exemplos',
     'ckeditor',

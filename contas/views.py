@@ -1,5 +1,6 @@
 import re
 
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.http import HttpResponse
@@ -41,6 +42,7 @@ def criar_conta(request):
                         user = usr)
 
             perl.save()
+            messages.success(request, "CONTA CRIADA COM SUCESSO, POR FAVOR, FAÇA O LOGIN")
             return redirect('login')
         else:
             return render(request, 'contas/criar_conta.html', {'form': user, 'form_perfil': perfil})
