@@ -3,7 +3,7 @@
 {% block content %}
   <div class="col-xl-6">
     {% for post in posts %}
-      {% include "fragments/card_base.html" with post=post %}
+      {% comment %} {% include "fragments/card_base.html" with post=post %} {% endcomment %}
       <div class="my-3"></div>
     {% endfor %}
   </div>

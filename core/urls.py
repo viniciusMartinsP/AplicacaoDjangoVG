@@ -11,6 +11,7 @@ urlpatterns = [
     path('cursos/', include('cursos.urls')),
     path('contato/', include('contato.urls')),
     path('criar_conta/', include('contas.urls')),
+    path('quiz/',include('quiz.urls')),
     path('exemplos/', include('exemplos.urls')),
     path('testes/', include('testes_pessoais.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),

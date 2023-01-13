@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cursos.apps.CursosConfig',
     'autenticacao.apps.AutenticacaoConfig',
     'contas.apps.ContasConfig',
+    'quiz.apps.QuizConfig',
     'testes_pessoais.apps.TestesPessoaisConfig',
     
     'exemplos',
@@ -95,14 +96,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
    'default': {
-   'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'blog',
             'USER': 'postgres',
             'PASSWORD': 'root',
             'HOST': '127.0.0.1',
             'PORT': '5432',
             'OPTIONS':{
-                'options': '-c search_path=blog_db',
+                'options': '-c search_path=blog_db2',
             },
      }
 }
